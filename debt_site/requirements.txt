@@ -1,0 +1,9 @@
+certifi==2019.9.11
+Django==2.2.5
+jedi==0.15.1
+parso==0.5.1
+pipenv==2018.11.26
+pytz==2019.2
+sqlparse==0.3.0
+virtualenv==16.7.5
+virtualenv-clone==0.5.3
