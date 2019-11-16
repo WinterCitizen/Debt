@@ -1,0 +1,58 @@
+name: Application linting & testing
+
+on: [push]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.8
+
+      - name: Install dependencies
+        run: |
+          pip install pipenv
+          pipenv install --system --dev --skip-lock
+
+      - name: Validate pep8 w/ flake8
+        run: |
+          flake8 . --count --show-source --statistics
+
+      - name: Validate typing w/ mypy
+        run: |
+          mypy --strict .
+
+      - name: Validate imports w/ isort
+        run: |
+          isort -rc --check .
+
+      - name: Validate formatting w/ yapf
+        run: |
+          yapf -r --diff .
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Set up python 3.8
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.8
+
+      - name: Install dependencies
+        run: |
+          pip install pipenv
+          pipenv install --system --dev --skip-lock
+
+      - name: Check missing migrations
+        run: |
+          ./manage.py makemigrations --check
+
+      - name: Run tests
+        run: |
+          pytest

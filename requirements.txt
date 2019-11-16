@@ -1,6 +1,0 @@
-certifi==2019.9.11
-Django==2.2.5
-jedi==0.15.1
-parso==0.5.1
-pytz==2019.2
-sqlparse==0.3.0
