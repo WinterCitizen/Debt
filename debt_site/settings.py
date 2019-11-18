@@ -54,7 +54,7 @@ ROOT_URLCONF = 'debt_site.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ["debt_site/templates/debt_site"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
