@@ -2,13 +2,13 @@ from typing import NoReturn
 
 import pytest
 
-from debt_site.repositories import DebtRepository, FakeDebtRepository
+from debt_site.repositories import DBDebtRepository, FakeDebtRepository
 
 
 @pytest.mark.parametrize(
     'debt_repository_class',
     [  # type: ignore
-        DebtRepository,
+        DBDebtRepository,
         FakeDebtRepository,
     ])
 @pytest.mark.django_db  # type: ignore
@@ -28,7 +28,7 @@ def test_debt_repository_create(debt_repository_class) -> NoReturn:
 @pytest.mark.parametrize(
     'debt_repository_class',
     [  # type: ignore
-        DebtRepository,
+        DBDebtRepository,
         FakeDebtRepository,
     ])
 @pytest.mark.django_db  # type: ignore
@@ -41,7 +41,7 @@ def test_debt_repository_filter_on_empty_db(debt_repository_class) -> NoReturn:
 @pytest.mark.parametrize(
     'debt_repository_class',
     [  # type: ignore
-        DebtRepository,
+        DBDebtRepository,
         FakeDebtRepository,
     ])
 @pytest.mark.django_db  # type: ignore
