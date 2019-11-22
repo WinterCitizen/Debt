@@ -2,7 +2,8 @@ from django.http import HttpResponseRedirect  # type: ignore
 from django.views.generic.edit import FormView  # type: ignore
 
 from debt_site.forms import DebtForm
-from debt_site.models import Debt
+from debt_site.repositories import DebtRepository
+from debt_site.services import DebtCreationService
 
 
 class DebtView(FormView):  # type: ignore
@@ -10,9 +11,11 @@ class DebtView(FormView):  # type: ignore
     form_class = DebtForm
     success_url = "/"
 
+    service = DebtCreationService(DebtRepository())
+
     def form_valid(self, form: DebtForm) -> HttpResponseRedirect:
         data = form.cleaned_data
-        Debt.objects.create(first_name=data["first_name"],
-                            last_name=data["last_name"],
-                            debt_amount=data["debt_amount"])
+        self.service.run(first_name=data["first_name"],
+                         last_name=data["last_name"],
+                         debt_amount=data["debt_amount"])
         return super().form_valid(form)

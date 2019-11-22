@@ -2,7 +2,7 @@ import dataclasses
 from typing import Union
 
 from debt_site.models import Debt
-from repositories import DebtRepository, FakeDebtRepository
+from debt_site.repositories import DebtRepository, FakeDebtRepository
 
 
 @dataclasses.dataclass
