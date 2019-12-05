@@ -1,6 +1,8 @@
 import dataclasses
 from typing import Dict, List, Union
-from django.db.models.query import QuerySet
+
+from django.db.models.query import QuerySet  # type: ignore
+
 from debt_site.models import Debt
 
 

@@ -21,12 +21,9 @@ def test_debt_repository_create(debt_repository_class) -> NoReturn:
         "last_name": "Fedyaev",
         "debt_amount": 7000
     }
-
     # When:
     #   Debt is created
-    created = repo.create(first_name=person["first_name"],
-                          last_name=person["last_name"],
-                          debt_amount=person["debt_amount"])
+    created = repo.create(**person)
     # Then:
     #   Retrieving from repository returns list of 1 length w/ created Debt
     filtered = repo.filter()
@@ -76,17 +73,11 @@ def test_debt_repository_filter(debt_repository_class) -> NoReturn:
         "last_name": "Voronin",
         "debt_amount": 15000
     }
-    created = repo.create(first_name=person["first_name"],
-                          last_name=person["last_name"],
-                          debt_amount=person["debt_amount"])
-    repo.create(first_name=person_2["first_name"],
-                last_name=person_2["last_name"],
-                debt_amount=person_2["debt_amount"])
+    created = repo.create(**person)
+    repo.create(**person_2)
     # Then
     #   Retrieving from repository returns list of 1
     #   filtered by first name, last name and debt amount
-    filtered = repo.filter(first_name=person["first_name"],
-                           last_name=person["last_name"],
-                           debt_amount=person["debt_amount"])
+    filtered = repo.filter(**person)
     assert len(filtered) == 1
     assert created == filtered[0]
