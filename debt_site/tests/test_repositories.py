@@ -1,7 +1,6 @@
 from typing import NoReturn
 
 import pytest
-
 from debt_site.repositories import DebtRepository, FakeDebtRepository
 
 
@@ -10,16 +9,17 @@ from debt_site.repositories import DebtRepository, FakeDebtRepository
     [  # type: ignore
         DebtRepository,
         FakeDebtRepository,
-    ])
+    ],
+)
 @pytest.mark.django_db  # type: ignore
 def test_debt_repository_create(debt_repository_class) -> NoReturn:
     # Given:
     #   Empty repository
     repo = debt_repository_class()
     person = {
-        "first_name": "Danya",
-        "last_name": "Fedyaev",
-        "debt_amount": 7000
+        'first_name': 'Danya',
+        'last_name': 'Fedyaev',
+        'debt_amount': 7000,
     }
     # When:
     #   Debt is created
@@ -36,7 +36,8 @@ def test_debt_repository_create(debt_repository_class) -> NoReturn:
     [  # type: ignore
         DebtRepository,
         FakeDebtRepository,
-    ])
+    ],
+)
 @pytest.mark.django_db  # type: ignore
 def test_debt_repository_filter_on_empty_db(debt_repository_class) -> NoReturn:
     # Given:
@@ -47,7 +48,7 @@ def test_debt_repository_filter_on_empty_db(debt_repository_class) -> NoReturn:
     # Then:
     #   Retrieving from repository returns list of 0 length w/o Debt
     filtered = repo.filter()
-    assert len(filtered) == 0
+    assert not len(filtered)
 
 
 @pytest.mark.parametrize(
@@ -55,7 +56,8 @@ def test_debt_repository_filter_on_empty_db(debt_repository_class) -> NoReturn:
     [  # type: ignore
         DebtRepository,
         FakeDebtRepository,
-    ])
+    ],
+)
 @pytest.mark.django_db  # type: ignore
 def test_debt_repository_filter(debt_repository_class) -> NoReturn:
     # Given:
@@ -64,17 +66,17 @@ def test_debt_repository_filter(debt_repository_class) -> NoReturn:
     # When:
     #   2 Debts are created
     person = {
-        "first_name": "Danya",
-        "last_name": "Fedyaev",
-        "debt_amount": 7000
+        'first_name': 'Danya',
+        'last_name': 'Fedyaev',
+        'debt_amount': 7000,
     }
-    person_2 = {
-        "first_name": "Vitya",
-        "last_name": "Voronin",
-        "debt_amount": 15000
+    other_person = {
+        'first_name': 'Vitya',
+        'last_name': 'Voronin',
+        'debt_amount': 15000,
     }
     created = repo.create(**person)
-    repo.create(**person_2)
+    repo.create(**other_person)
     # Then
     #   Retrieving from repository returns list of 1
     #   filtered by first name, last name and debt amount

@@ -1,23 +1,25 @@
 [[source]]
-name = "pypi"
-url = "https://pypi.org/simple"
+name = 'pypi'
+url = 'https://pypi.org/simple'
 verify_ssl = true
 
 [dev-packages]
-flake8 = "*"
-mypy = "*"
-yapf = "*"
-pytest = "*"
-isort = "*"
-ipython = "*"
-pytest-django = "*"
-rope = "*"
+flake8 = '*'
+mypy = "<0.750"
+pytest = '*'
+isort = '*'
+ipython = '*'
+pytest-django = '*'
+rope = '*'
+black = '*'
+wemake-python-styleguide = '*'
+django-stubs = "*"
 
 [packages]
-django = "<3"
+django = '<3'
 
 [requires]
-python_version = "3.8"
+python_version = '3.8'
 
 [pipenv]
 allow_prereleases = true

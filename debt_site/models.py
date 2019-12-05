@@ -1,7 +1,7 @@
-from django.db import models  # type: ignore
+from django.db import models
 
 
-class Debt(models.Model):  # type: ignore
+class Debt(models.Model):
 
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
