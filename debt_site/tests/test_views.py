@@ -12,8 +12,8 @@ def client() -> Client:
     return Client()
 
 
-def test_client(monkeypatch: _pytest.monkeypatch.MonkeyPatch,
-                client: Client) -> None:
+def test_DebtView_post(monkeypatch: _pytest.monkeypatch.MonkeyPatch,
+                       client: Client) -> None:
     repo = FakeDebtRepository()
     monkeypatch.setattr(DebtView,
                         'service',
@@ -25,9 +25,9 @@ def test_client(monkeypatch: _pytest.monkeypatch.MonkeyPatch,
         'debt_amount': 312312
     }
     response = client.post('/', form_data, follow=True)
-
     filtered = repo.filter()
-    debt, *_ = filtered
+    assert len(filtered) == 1
+    debt = filtered[0]
     assert response.status_code == 200
     assert debt.first_name == form_data['first_name']
     assert debt.last_name == form_data['last_name']

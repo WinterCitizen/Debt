@@ -1,6 +1,6 @@
 import dataclasses
-from typing import Dict, Iterable, List, Union
-
+from typing import Dict, List, Union
+from django.db.models.query import QuerySet
 from debt_site.models import Debt
 
 
@@ -12,8 +12,8 @@ class DebtRepository:
                                            debt_amount=debt_amount)
         return result
 
-    def filter(self, **fields: Dict[str, Union[str, int]]) -> Iterable[Debt]:
-        result: Iterable[Debt] = Debt.objects.filter(**fields)
+    def filter(self, **fields: Dict[str, Union[str, int]]) -> QuerySet:
+        result: QuerySet = Debt.objects.filter(**fields)
         return result
 
 
@@ -36,7 +36,7 @@ class FakeDebtRepository:
                 return False
         return True
 
-    def filter(self, **fields: Dict[str, Union[str, int]]) -> Iterable[Debt]:
+    def filter(self, **fields: Dict[str, Union[str, int]]) -> List[Debt]:
         matching_debts = []
         for obj in self._objects:
             if self._matching(obj, **fields):
