@@ -13,6 +13,20 @@
         {{ form.as_p }}
         <input type='submit' value='Send message'>
     </form>
+    <table>
+        <tr>
+            <th>First name</th>
+            <th>Last name</th>
+            <th>Debt amount</th>
+        </tr>
+        {% for debtor in debtors %}
+        <tr>
+            <td>{{ debtor.first_name }}</td>
+            <td>{{ debtor.last_name }}</td>
+            <td>{{ debtor.debt_amount }}</td>
+        </tr>
+        {% endfor %}
+    </table>
 </body>
 
 </html>
