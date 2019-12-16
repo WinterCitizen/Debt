@@ -14,7 +14,6 @@ def client() -> Client:
     return Client()
 
 
-@pytest.mark.django_db  # type: ignore
 def test_debt_view_post(
     monkeypatch: _pytest.monkeypatch.MonkeyPatch,
     client: Client,  # noqa: WPS442
